@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<title>JSF</title>
+</h:head>
+
+<h:body>
+
+
+	<h:outputText value="Cadastro de endereço"></h:outputText>
+
+	<h:form id="form2">
+	<h:messages showDetail="true" showSummary="false" />
+	    <p:panelGrid columns="2">
+	     <h:outputLabel>Cliente:</h:outputLabel>
+        <p:inputText value="#{endeClienteBean.cliente.nomeCliente}" pt:placeholder="Cep"></p:inputText>
+          <h:outputLabel>Localidade:</h:outputLabel >
+        <p:inputText value="#{endeClienteBean.end.localidade}" required="true" requiredMessage="Informe o nome"></p:inputText>
+         <h:outputLabel>Bairro:</h:outputLabel>
+        <p:inputText value="#{endeClienteBean.end.bairro}" pt:placeholder="Bairro"></p:inputText>
+           <h:outputLabel>Logradouro:</h:outputLabel>
+        <p:inputText value="#{endeClienteBean.end.logradouro}" pt:placeholder="Logradouro"></p:inputText>
+        <h:outputLabel>Cep:</h:outputLabel>
+        <p:inputText value="#{endeClienteBean.end.cep}" pt:placeholder="Cep"></p:inputText>
+        
+        <p:commandButton value="Salvar" action="#{endeClienteBean.Salvar}">
+           <f:param name="codigouser" value="#{endeClienteBean.cliente.idCliente}"/>
+           <f:ajax render="@form" resetValues="true"/>
+        </p:commandButton>
+       
+       
+        
+       
+       
+        </p:panelGrid>
+      	 <p:commandButton value="Inicio"  action="#{clienteBean.PagInicial}"/>
+      	 
+
+	</h:form>
+	<br/>
+	
+	 <h:outputText value="Endereços"></h:outputText>
+	 <p:dataTable value="#{endeClienteBean.listaEnd}"   var="user" cellpadding="15" border="1">
+          <p:column>
+           <f:facet name="header">Logradouro</f:facet >
+           <h:outputText value="#{user.logradouro}"></h:outputText>
+         </p:column>
+         <p:column>
+           <f:facet name="header">Bairro</f:facet >
+           <h:outputText value="#{user.bairro}"></h:outputText>
+         </p:column>
+          <p:column>
+           <f:facet name="header">Complemento</f:facet >
+           <h:outputText value="#{user.complemento}"></h:outputText>
+         </p:column>
+         <p:column>
+           <f:facet name="header">Cep</f:facet >
+           <h:outputText value="#{user.cep}"></h:outputText>
+         </p:column>
+         
+         </p:dataTable>
+	
+
+</h:body>
+</html>

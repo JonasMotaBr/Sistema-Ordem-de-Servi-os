@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>JSF</title>
+</h:head>
+
+<h:body>
+
+
+	<h:outputText value="Lista de cliente"></h:outputText>
+    <p:commandButton value="Voltar"  action="index"/>
+    
+      <p:dataTable value="#{clienteBean.lista}"   var="user" cellpadding="15" border="1">
+         
+         <p:column>
+           <f:facet name="header">Nome</f:facet >
+           <h:outputText value="#{user.nomeCliente}"></h:outputText>
+         </p:column>
+          <p:column>
+           <f:facet name="header">CPF</f:facet >
+           <h:outputText value="#{user.cpfCliente}"></h:outputText>
+         </p:column>
+         <p:column>
+           <f:facet name="header">Contato</f:facet >
+           <h:outputText value="#{user.contato}"></h:outputText>
+         </p:column>
+      
+          <p:column>
+           <f:facet name="header">Editar</f:facet >
+              <h:form>
+           <h:commandLink value="Editar" action="#{clienteBean.editarCliente}" >
+              <f:setPropertyActionListener  value="#{user}" target="#{clienteBean.cliente}"></f:setPropertyActionListener>
+           </h:commandLink>
+               </h:form>
+         </p:column>
+         <p:column>
+           <f:facet name="header">Remover</f:facet >
+              <h:form>
+           <h:commandLink  action="#{clienteBean.Remover}" immediate="true">
+              <h:graphicImage url="resources/img/delete.jpg" width="25" height="25"/>
+              <f:setPropertyActionListener  value="#{user}" target="#{clienteBean.cliente}"></f:setPropertyActionListener>
+           
+           </h:commandLink>
+            </h:form>
+         </p:column>
+       
+          <p:column>
+           <f:facet name="header">Endereço</f:facet >
+              <h:form>
+           <h:commandLink immediate="true" value="Telefones" action="cadastrartelefone.jsf" >
+            <f:param name="codigouser" value="#{user.idCliente}"/>
+           </h:commandLink>
+               </h:form>
+         </p:column>
+      </p:dataTable>
+	
+	
+</h:body>
+</html>
