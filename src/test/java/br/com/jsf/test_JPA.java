@@ -9,5 +9,6 @@ public class test_JPA {
 		Persistence.createEntityManagerFactory("Projeto_JSF");
 		
 	}
+	
 
 }

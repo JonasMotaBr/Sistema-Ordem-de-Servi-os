@@ -27,7 +27,9 @@ public class EndClienteBean {
 	@PostConstruct
 	public void init() {
 		String codUser = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigouser");
-		cliente = daocliente.pesquisar(Long.parseLong(codUser), ClienteEntity.class);
+		if(codUser != null){ 
+			cliente = daocliente.pesquisar(Long.parseLong(codUser), ClienteEntity.class);
+	   }
 	}
 
 	public String Salvar() {
@@ -35,7 +37,12 @@ public class EndClienteBean {
 		daoEnd.salvar(end);
 		return "";
 	}
-
+    public String RemoverEndereco() {
+    	System.out.println(end);
+    	daoEnd.deletePorId(end);
+    	end = new EnderecoClienteEntity();
+    	return "";
+    }
 
 
 	public EnderecoClienteEntity getEnd() {

@@ -28,44 +28,51 @@
         <p:inputText value="#{endeClienteBean.end.logradouro}" pt:placeholder="Logradouro"></p:inputText>
         <h:outputLabel>Cep:</h:outputLabel>
         <p:inputText value="#{endeClienteBean.end.cep}" pt:placeholder="Cep"></p:inputText>
-        
+         
         <p:commandButton value="Salvar" action="#{endeClienteBean.Salvar}">
            <f:param name="codigouser" value="#{endeClienteBean.cliente.idCliente}"/>
            <f:ajax render="@form" resetValues="true"/>
         </p:commandButton>
-       
-       
-        
+
        
        
         </p:panelGrid>
-      	 <p:commandButton value="Inicio"  action="#{clienteBean.PagInicial}"/>
       	 
 
 	</h:form>
 	<br/>
-	
+	<h:form id="formEnderecos">
 	 <h:outputText value="Endereços"></h:outputText>
-	 <p:dataTable value="#{endeClienteBean.listaEnd}"   var="user" cellpadding="15" border="1">
+	 <p:dataTable value="#{endeClienteBean.listaEnd}"   var="endereco" cellpadding="15" border="1">
           <p:column>
            <f:facet name="header">Logradouro</f:facet >
-           <h:outputText value="#{user.logradouro}"></h:outputText>
+           <h:outputText value="#{endereco.logradouro}"></h:outputText>
          </p:column>
          <p:column>
            <f:facet name="header">Bairro</f:facet >
-           <h:outputText value="#{user.bairro}"></h:outputText>
+           <h:outputText value="#{endereco.bairro}"></h:outputText>
          </p:column>
           <p:column>
            <f:facet name="header">Complemento</f:facet >
-           <h:outputText value="#{user.complemento}"></h:outputText>
+           <h:outputText value="#{endereco.complemento}"></h:outputText>
          </p:column>
          <p:column>
            <f:facet name="header">Cep</f:facet >
-           <h:outputText value="#{user.cep}"></h:outputText>
+           <h:outputText value="#{endereco.cep}"></h:outputText>
          </p:column>
          
+ 
+            <p:column>
+           <f:facet name="header">Remover</f:facet >
+           <h:commandLink  action="#{endeClienteBean.RemoverEndereco}" immediate="true">
+              <h:graphicImage url="resources/img/delete.jpg" width="25" height="25"/>
+              <f:setPropertyActionListener  value="#{endereco}" target="#{endeClienteBean.end}"></f:setPropertyActionListener>
+           
+           </h:commandLink>
+         </p:column>
+
          </p:dataTable>
-	
+	   </h:form>
 
 </h:body>
 </html>
