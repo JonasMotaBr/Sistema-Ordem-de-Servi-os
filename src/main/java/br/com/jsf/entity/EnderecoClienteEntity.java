@@ -127,6 +127,13 @@ public class EnderecoClienteEntity implements Serializable {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "EnderecoClienteEntity [idEnd=" + idEnd + ", cep=" + cep + ", logradouro=" + logradouro
+				+ ", complemento=" + complemento + ", bairro=" + bairro + ", localidade=" + localidade + ", uf=" + uf
+				+ ", ibge=" + ibge + ", gia=" + gia + ", ddd=" + ddd + ", siafi=" + siafi + ", clienteEntity="
+				+ clienteEntity + "]";
+	}
 	
 	
 	

@@ -14,32 +14,41 @@
 
 
 	<h:outputText value="Cadastro de endereço"></h:outputText>
-
+     	<br/>
+	<h:form id="inicio">  
+        <p:commandButton value="Inicio" action="#{endeClienteBean.Paginainicial}"/>   
+	</h:form>
 	<h:form id="form2">
 	<h:messages showDetail="true" showSummary="false" />
 	    <p:panelGrid columns="2">
 	     <h:outputLabel>Cliente:</h:outputLabel>
         <p:inputText value="#{endeClienteBean.cliente.nomeCliente}" pt:placeholder="Cep"></p:inputText>
+          <h:outputLabel>Cep:</h:outputLabel>
+        <p:inputText value="#{endeClienteBean.end.cep}" pt:placeholder="Cep" id="cepuser">
+          <f:ajax event="blur"  execute="cepuser" listener="#{endeClienteBean.pesquisacep}" render="Localidade bairro lagradouro"></f:ajax>
+        </p:inputText>
+         
           <h:outputLabel>Localidade:</h:outputLabel >
-        <p:inputText value="#{endeClienteBean.end.localidade}" required="true" requiredMessage="Informe o nome"></p:inputText>
+        <p:inputText value="#{endeClienteBean.end.localidade}" required="true" id="Localidade" requiredMessage="Informe o nome"></p:inputText>
          <h:outputLabel>Bairro:</h:outputLabel>
-        <p:inputText value="#{endeClienteBean.end.bairro}" pt:placeholder="Bairro"></p:inputText>
+        <p:inputText value="#{endeClienteBean.end.bairro}" pt:placeholder="Bairro" id="bairro"></p:inputText>
            <h:outputLabel>Logradouro:</h:outputLabel>
-        <p:inputText value="#{endeClienteBean.end.logradouro}" pt:placeholder="Logradouro"></p:inputText>
-        <h:outputLabel>Cep:</h:outputLabel>
-        <p:inputText value="#{endeClienteBean.end.cep}" pt:placeholder="Cep"></p:inputText>
+        <p:inputText value="#{endeClienteBean.end.logradouro}" pt:placeholder="Logradouro" id="lagradouro"></p:inputText>
+         <h:outputLabel>Complemento:</h:outputLabel>
+        <p:inputText value="#{endeClienteBean.end.complemento}" pt:placeholder="Complemento" ></p:inputText>
+       
          
         <p:commandButton value="Salvar" action="#{endeClienteBean.Salvar}">
            <f:param name="codigouser" value="#{endeClienteBean.cliente.idCliente}"/>
-           <f:ajax render="@form" resetValues="true"/>
+           <f:ajax render="formEnderecos"  resetValues="true"/>
         </p:commandButton>
 
        
        
         </p:panelGrid>
-      	 
-
 	</h:form>
+	
+
 	<br/>
 	<h:form id="formEnderecos">
 	 <h:outputText value="Endereços"></h:outputText>
@@ -67,7 +76,7 @@
            <h:commandLink  action="#{endeClienteBean.RemoverEndereco}" immediate="true">
               <h:graphicImage url="resources/img/delete.jpg" width="25" height="25"/>
               <f:setPropertyActionListener  value="#{endereco}" target="#{endeClienteBean.end}"></f:setPropertyActionListener>
-           
+             <f:ajax execute="botaoremover" render="@form" />	
            </h:commandLink>
          </p:column>
 

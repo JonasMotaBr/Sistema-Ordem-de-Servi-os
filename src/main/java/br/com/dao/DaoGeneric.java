@@ -65,7 +65,9 @@ public class DaoGeneric<E> {
 	
 	
 	public List<E> getListEntity(Class<E> entidade){
+		
 		EntityManager entityManager = HibernateUtil.geEntityManager();
+		entityManager.clear();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
 		

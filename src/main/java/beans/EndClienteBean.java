@@ -1,12 +1,20 @@
 package beans;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
+
+import com.google.gson.Gson;
 
 import br.com.dao.DaoGeneric;
 import br.com.jsf.entity.ClienteEntity;
@@ -31,11 +39,43 @@ public class EndClienteBean {
 			cliente = daocliente.pesquisar(Long.parseLong(codUser), ClienteEntity.class);
 	   }
 	}
+	public String Paginainicial() {
+		return "index";
+	}
+	
+	
+	public void pesquisacep(AjaxBehaviorEvent event) {
+		try {
+			URL url = new URL("https://viacep.com.br/ws/"+end.getCep()+"/json/");
+			URLConnection connection = url.openConnection();
+			InputStream is = connection.getInputStream();
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+			
+			String cep = "";
+			StringBuilder jsonCep = new StringBuilder();
+			while ((cep = br.readLine()) != null)  {
+				jsonCep.append(cep);
+			}
+			
+			EnderecoClienteEntity enderecoCep = new Gson().fromJson(jsonCep.toString(), EnderecoClienteEntity.class);
+             end.setBairro(enderecoCep.getBairro());
+             end.setComplemento(enderecoCep.getComplemento());
+             end.setDdd(enderecoCep.getDdd());
+             end.setGia(enderecoCep.getGia());
+             end.setIbge(enderecoCep.getIbge());
+             end.setLocalidade(enderecoCep.getLocalidade());
+             end.setLogradouro(enderecoCep.getLogradouro());
+             end.setUf(enderecoCep.getUf());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
+	
 	public String Salvar() {
 		end.setClienteEntity(cliente);
 		daoEnd.salvar(end);
-		return "";
+		return "index";
 	}
     public String RemoverEndereco() {
     	System.out.println(end);
