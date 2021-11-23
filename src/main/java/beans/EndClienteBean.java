@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -16,6 +17,7 @@ import javax.faces.view.ViewScoped;
 
 import com.google.gson.Gson;
 
+import br.com.dao.DaoEndereco;
 import br.com.dao.DaoGeneric;
 import br.com.jsf.entity.ClienteEntity;
 import br.com.jsf.entity.EnderecoClienteEntity;
@@ -26,7 +28,8 @@ public class EndClienteBean {
 	
 	ClienteEntity cliente = new ClienteEntity();
 	EnderecoClienteEntity end = new EnderecoClienteEntity();
-	DaoGeneric<EnderecoClienteEntity> daoEnd = new DaoGeneric<EnderecoClienteEntity>();
+	DaoEndereco<EnderecoClienteEntity> daoEnd = new DaoEndereco<EnderecoClienteEntity>();
+	
 	DaoGeneric<ClienteEntity> daocliente = new DaoGeneric<ClienteEntity>();
 	List<EnderecoClienteEntity>	listaEnd = new ArrayList<EnderecoClienteEntity>();
 	
@@ -75,6 +78,8 @@ public class EndClienteBean {
 	public String Salvar() {
 		end.setClienteEntity(cliente);
 		daoEnd.salvar(end);
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação: ", "Salvo com sucesso!"));
 		return "index";
 	}
     public String RemoverEndereco() {
@@ -91,7 +96,7 @@ public class EndClienteBean {
 
 
 	public List<EnderecoClienteEntity> getListaEnd() {
-    	listaEnd = daoEnd.getListEntity(EnderecoClienteEntity.class);
+    	listaEnd = daoEnd.getListEntityPorId(EnderecoClienteEntity.class, cliente );
     	return listaEnd;
 	}
 

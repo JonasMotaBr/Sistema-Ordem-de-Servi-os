@@ -8,3 +8,16 @@
 body {
 background-image: url(https://fronter.com.br/wp-content/uploads/2019/06/281122-x-ferramentas-e-equipamentos-essenciais-para-oficina-uma-mecanica-1920x1200.jpg);
 }
+
+#container{
+	 width: 100%;
+    border-color: blue;
+    text-align: center; background-color: blue;
+}
+
+#box{
+	float: left;
+       width: 100px; height: 200px;
+       margin: 10px 20px;
+	
+}

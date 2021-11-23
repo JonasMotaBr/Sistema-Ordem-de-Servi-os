@@ -5,8 +5,8 @@
 	 <class>br.com.jsf.entity.UsuarioEntity</class>
 	  <class>br.com.jsf.entity.ClienteEntity</class>
 	  <class>br.com.jsf.entity.ServicoEntity</class>
-	   <class>br.com.jsf.entity.EnderecoClienteEntity</class>
-	 
+	  <class>br.com.jsf.entity.EnderecoClienteEntity</class>
+	  <class>br.com.jsf.entity.FuncionarioEntity</class>
 	  <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/bd_jsf" /> <!-- BD Mane -->

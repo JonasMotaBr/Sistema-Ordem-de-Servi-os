@@ -20,11 +20,11 @@
           <h:outputLabel>Nome:</h:outputLabel>
         <p:inputText value="#{clienteBean.cliente.nomeCliente}" required="true" requiredMessage="Informe o nome"></p:inputText>
           <h:outputLabel>CPF:</h:outputLabel>
-        <p:inputText value="#{clienteBean.cliente.cpfCliente}"></p:inputText>
+        <p:inputText value="#{clienteBean.cliente.cpfCliente}"  required="true" requiredMessage="Informe o CPF/CNPJ"></p:inputText>
           <h:outputLabel>CNPJ:</h:outputLabel>
         <p:inputText value="#{clienteBean.cliente.cnpjCliente}"></p:inputText>
           <h:outputLabel>Contato:</h:outputLabel>
-        <p:inputText value="#{clienteBean.cliente.contato}"></p:inputText>
+        <p:inputText value="#{clienteBean.cliente.contato}"  required="true" requiredMessage="Informe o contato"></p:inputText>
            <h:outputLabel>Sexo:</h:outputLabel>
         <h:selectOneMenu >
            <f:selectItem itemValue="Masculino"/>

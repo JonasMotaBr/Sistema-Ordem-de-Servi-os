@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,16 +14,18 @@ import javax.persistence.OneToMany;
 @Entity
 public class ServicoEntity implements Serializable{
 
-	
-
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idServico;
 	private String descricaoServico;
-	private String funcionarioServico;
 	private Date data;
+	
+	
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private FuncionarioEntity funcionarioEntity;
 	
 	@ManyToOne
 	private ClienteEntity clienteEntity;
@@ -43,14 +46,6 @@ public class ServicoEntity implements Serializable{
 		this.descricaoServico = descricaoServico;
 	}
 
-	public String getFuncionarioServico() {
-		return funcionarioServico;
-	}
-
-	public void setFuncionarioServico(String funcionarioServico) {
-		this.funcionarioServico = funcionarioServico;
-	}
-
 	public Date getData() {
 		return data;
 	}
@@ -65,6 +60,15 @@ public class ServicoEntity implements Serializable{
 
 	public void setClienteEntity(ClienteEntity clienteEntity) {
 		this.clienteEntity = clienteEntity;
+	}
+	
+
+	public FuncionarioEntity getFuncionarioEntity() {
+		return funcionarioEntity;
+	}
+
+	public void setFuncionarioEntity(FuncionarioEntity funcionarioEntity) {
+		this.funcionarioEntity = funcionarioEntity;
 	}
 
 	@Override
@@ -92,13 +96,6 @@ public class ServicoEntity implements Serializable{
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "ServicoEntity [idServico=" + idServico + ", descricaoServico=" + descricaoServico
-				+ ", funcionarioServico=" + funcionarioServico + ", data=" + data + ", clienteEntity=" + clienteEntity
-				+ "]";
-	}
-	
 	
 	
 	
